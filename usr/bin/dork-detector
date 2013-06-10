@@ -1,0 +1,36 @@
+#!/bin/bash
+
+source /etc/dork-detector.conf;
+
+usage() {
+  echo "Usage: $(basename $0) <check|build|help>";
+}
+
+need_gcc_msg() {
+  echo "You don't seem to have gcc installed.
+Try installing it with 'sudo apt-get install build-essential'
+";
+}
+
+detect_gcc() {
+  which gcc
+  [[ "$?" != "0" ]] && need_gcc_msg && exit 1;
+}
+
+check_ram_for_cdorked() {
+  [[ ! -e "/usr/bin/dump_cdorked_config" ]] && echo "Need to build first: run '$(basename $0) build'" && exit 1;
+  output="$(cd /tmp && /usr/bin/dump_cdorked_config)";
+  echo $output;
+  [[ "$(echo $output|grep "$NOT_FOUND_MSG"|wc -l)" = "0" ]] && exit 0;
+}
+
+case "$1" in
+  "build"|"b")
+    detect_gcc;
+    echo "Building dump_cdorked_config...";
+    gcc -o /usr/bin/dump_cdorked_config /usr/src/eset/dump_cdorked_config.c;
+    ;;
+  "check"|"c")          check_ram_for_cdorked ;;
+  "help"|"-h"|"--help") usage ;;
+  *)                    usage ;;
+esac;

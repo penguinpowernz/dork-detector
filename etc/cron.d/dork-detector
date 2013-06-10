@@ -1,0 +1,4 @@
+# Detector for Linux/Cdorked.A
+
+0 * * * * root /usr/bin/dork-detector
+
