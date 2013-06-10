@@ -1,0 +1,14 @@
+Package: dork-detector
+Version: 0.1
+Section: misc
+Priority: optional
+Architecture: all
+Essential: no
+Depends: gcc
+Installed-Size: 56
+Maintainer: Robert McLeod <robert@penguinpower.co.nz>
+Homepage: http://github.com/penguinpowernz/dork-detector
+Description: Checks and monitors a system for the Cdorked malware
+  * Uses detector tool from ESET
+  * Requires gcc to compile the tool
+  * More information from http://www.welivesecurity.com/2013/05/07/linuxcdorked-malware-lighttpd-and-nginx-web-servers-also-affected/

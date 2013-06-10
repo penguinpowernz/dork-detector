@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Build the tool
+/usr/bin/dork-detector build
